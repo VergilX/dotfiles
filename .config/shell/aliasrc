@@ -1,0 +1,5 @@
+#!/bin/zsh
+
+alias speed="firefox -private-window https://monkeytype.com"
+# alias wall="nitrogen --set-scaled $PICS/$(awk '$1=$1')"
+alias dots='/usr/bin/git --git-dir=$HOME/.dotfiles/ --work-tree=$HOME'

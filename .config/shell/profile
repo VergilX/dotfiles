@@ -1,0 +1,15 @@
+#!/bin/zsh
+
+export EDITOR="nvim"
+export TERMINAL="alacritty"
+export BROWSER="firefox"
+
+# Folders
+export XDG_CONFIG_HOME="$HOME/.config"
+export PICS="$HOME/pics"
+export DOCS="$HOME/docs"
+export MOOSIC="$HOME/moosic"
+export VIDS="$HOME/videos"
+
+export STARSHIP_CONFIG="$XDG_CONFIG_HOME/starship/starship.toml"
+export ZDOTDIR="$XDG_CONFIG_HOME/zsh"

@@ -1,0 +1,1 @@
+/home/abhinand/.config/shell/profile

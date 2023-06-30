@@ -1,0 +1,11 @@
+[user]
+	name = VergilX
+	email = abhinand.dmanoj@gmail.com
+[core]
+	editor = nvim
+[init]
+	defaultBranch = master
+[pull]
+	rebase = true
+[http]
+	postBuffer = 524288000

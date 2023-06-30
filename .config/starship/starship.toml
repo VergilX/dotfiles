@@ -9,6 +9,7 @@ format = "$all"
 
 # Replace the '❯' symbol in the prompt with '➜'
 [character]
+disabled=true
 success_symbol = '[➜](bold green)' # The 'success_symbol' segment is being set to '➜' with the color 'bold green'
 error_symbol = '[➜](bold red)' # The 'error_symbol' segment is being set to '➜' with the color 'bold red'
 
@@ -20,11 +21,7 @@ disabled = true
 always_show_remote = true
 
 [directory]
-format = '[$path]($style) '
+format = '\[[CrinklyNinja | $path]($style)\] ' # Must replace CrinklyNinja with $user
 truncation_length = 0
 
-[shell]
-format = '[$indicator]($style) '
-style = 'blue bold'
-disabled = false
 

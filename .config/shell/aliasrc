@@ -6,3 +6,5 @@ alias dots='/usr/bin/git --git-dir=$HOME/.dotfiles/ --work-tree=$HOME'
 alias v='nvim'
 alias card='prime-run'
 alias ll='ls -lah'
+alias ginfo="echo;echo;(uname -a;(lsb_release -d||grep . /etc/*_version /etc/*-release;grep . /sys/devices/virtual/dmi/id/{sys_vendor,product_{name,sku},board_name}|grep -vE 'illed|ystem')2>/dev/null;grep '^model n' /proc/cpuinfo|head -1;grep -E '(Mem|Swap)Total' /proc/meminfo;lspci|grep -E '[VX]GA|3D';echo $XDG_SESSION_TYPE;glxinfo -B|grep -E 'Device:|Version:|GL (version|renderer) s';vulkaninfo --summary|grep -E 'deviceName|driverInfo';pactl info|grep \"^Server N\";mount|grep -E 'ntfs| on / ')2>&1|sed -E -e 's/^\\s*/    /';echo;echo"
+alias localhosts="echo 192.168.1.{1..254}|xargs -n1 -P0 ping -c1|grep 'bytes from'"

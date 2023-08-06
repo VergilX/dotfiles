@@ -189,6 +189,9 @@ exec  --no-startup-id firefox -private-window https://wiki.archlinux.org/title/G
 
 ##### SETTINGS ################################################
 
+# Screenshot
+bindsym $mod+Shift+s exec --no-startup-id flameshot gui
+
 # Use Mouse+$mod to drag floating windows
 floating_modifier $mod
 

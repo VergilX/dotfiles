@@ -230,8 +230,8 @@ bindsym $win+m exec --no-startup-id amixer sset Master toggle
 bindsym $win+h exec --no-startup-id mpc seek -00:00:05
 bindsym $win+l exec --no-startup-id mpc seek +00:00:05
 
-bindsym $win+Shift+h exec --no-startup-id mpc prev && notify-send "Playing $(mpc current)"
-bindsym $win+Shift+l exec --no-startup-id mpc next && notify-send "Playing $(mpc current)"
+bindsym $win+Shift+h exec --no-startup-id mpc prev && dunstctl close && notify-send "Playing $(mpc current)"
+bindsym $win+Shift+l exec --no-startup-id mpc next && dunstctl close && notify-send "Playing $(mpc current)"
 bindsym $win+Shift+j exec --no-startup-id mpc toggle
 
 ##### BRIGHTNESS ###################################################

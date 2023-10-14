@@ -5,7 +5,13 @@
 # Inserts a blank line between shell prompts
 add_newline = true
 
-format = "$all"
+format = """
+$username\
+$hostname\
+$directory\
+$time\
+$shell\
+$line_break"""
 
 # Replace the '❯' symbol in the prompt with '➜'
 [character]

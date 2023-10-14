@@ -1,9 +1,10 @@
 " CREDIT: https://github.com/amix/vimrc/blob/master/vimrcs/basic.vim
 
-"""""""""""""PERSONSAL""""""""""""
+"""""""""""""PERSONAL""""""""""""
 
 set number
 set relativenumber
+set clipboard+=unnamedplus
 
 """"""""""""""""""""""""""""''''
 

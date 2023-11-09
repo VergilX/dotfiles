@@ -5,6 +5,45 @@
 set number
 set relativenumber
 set clipboard+=unnamedplus
+"
+"
+" " Plugins
+"
+call plug#begin('~/.config/nvim/plugged')
+
+Plug 'Shougo/vimproc.vim', {'do' : 'make'}
+Plug 'bronson/vim-trailing-whitespace'
+Plug 'Shougo/unite.vim'
+Plug 'rking/ag.vim'
+Plug 'preservim/nerdtree'
+Plug 'https://github.com/tpope/vim-surround'
+
+call plug#end()
+
+
+" Plugin settings
+" -- Trailing Whitespace
+" if (exists('+colorcolumn'))
+"     set colorcolumn=80
+"     highlight ColorColumn ctermbg=9
+" endif
+
+
+" -- File Management
+let g:unite_source_history_yank_enable = 1
+try
+  let g:unite_source_rec_async_command='ag --nocolor --nogroup -g ""'
+  call unite#filters#matcher_default#use(['matcher_fuzzy'])
+catch
+endtry
+" search a file in the filetree
+nnoremap <space><space> :split<cr> :<C-u>Unite -start-insert file_rec/async<cr>
+" reset not it is <C-l> normally
+:nnoremap <space>r <Plug>(unite_restart)
+
+" --- type ° to search the word in all files in the current dir
+nmap ° :Ag <c-r>=expand("<cword>")<cr><cr>
+nnoremap <space>/ :Ag
 
 """"""""""""""""""""""""""""''''
 

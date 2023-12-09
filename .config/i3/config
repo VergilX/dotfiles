@@ -20,7 +20,7 @@ set $ws9 "9"
 set $ws10 "10"
 
 # Terminal
-set $EDITOR "alacritty"
+set $EDITOR "st"
 
 ####### FONTS ##############################################
 
@@ -146,10 +146,10 @@ bindsym $mod+Shift+e exec "i3-nagbar -t warning -m 'You pressed the exit shortcu
          # Pressing right will grow the window’s width.
          # Pressing up will shrink the window’s height.
          # Pressing down will grow the window’s height.
-         bindsym l resize shrink width 10 px or 10 ppt
+         bindsym h resize shrink width 10 px or 10 ppt
          bindsym j resize grow height 10 px or 10 ppt
          bindsym k resize shrink height 10 px or 10 ppt
-         bindsym h resize grow width 10 px or 10 ppt
+         bindsym l resize grow width 10 px or 10 ppt
 
          # same bindings, but for the arrow keys
          bindsym Left resize shrink width 10 px or 10 ppt
@@ -173,13 +173,13 @@ exec --no-startup-id picom --config "$XDG_CONFIG_HOME/picom/picom.conf"
 
 # Wallpaper: Nitrogen
 # exec --no-startup-id nitrogen --set-scaled "$PICS/wallpaper.jpg"
-exec --no-startup-id nitrogen --set-auto "pics/sekiro.jpg"
+exec --no-startup-id nitrogen --set-auto "pics/homura.jpg"
 
 # Resolution (done in xinitrc)
 # exec ~/.screenlayout/set_res.sh &
 
 # Applications
-exec --no-startup-id alacritty
+exec --no-startup-id $EDITOR
 # exec --no-startup-id LD_PRELOAD=/usr/lib/spotify-adblock.so spotify --no-zygote
 
 # exec firefox -private-window https://www.youtube.com/results?search_query="pomodoro technique sherry formula"
@@ -232,6 +232,7 @@ bindsym $win+l exec --no-startup-id mpc seek +00:00:05
 
 bindsym $win+Shift+h exec --no-startup-id mpc prev && dunstctl close && notify-send "Playing $(mpc current)"
 bindsym $win+Shift+l exec --no-startup-id mpc next && dunstctl close && notify-send "Playing $(mpc current)"
+bindsym $win+Shift+k exec --no-startup-id mpc prev && mpc next && dunstctl close && notify-send "Repeat: $(mpc current)"
 bindsym $win+Shift+j exec --no-startup-id mpc toggle
 
 ##### BRIGHTNESS ###################################################

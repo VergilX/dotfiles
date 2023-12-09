@@ -13,6 +13,7 @@ export VIDS="$HOME/videos"
 
 export STARSHIP_CONFIG="$XDG_CONFIG_HOME/starship/starship.toml"
 export ZDOTDIR="$XDG_CONFIG_HOME/zsh"
+# export HISTFILE="${ZDOTDIR}/zsh/.zsh_history"
 
 case "$(tty)" in
 *"/tty1") startx ;;

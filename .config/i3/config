@@ -85,8 +85,8 @@ bindsym $mod+e layout toggle split
 # toggle tiling / floating
 bindsym $mod+Shift+space floating toggle
 
-# focus the parent container
-bindsym $mod+a focus parent
+# focus toggle tiling and floating
+bindsym $mod+c focus mode_toggle
 
 # focus the child container
 # bindsym $mod+d focus child
@@ -185,6 +185,7 @@ exec --no-startup-id $EDITOR
 # exec firefox -private-window https://www.youtube.com/results?search_query="pomodoro technique sherry formula"
 
 exec  --no-startup-id firefox -private-window https://wiki.archlinux.org/title/General_recommendations
+exec  --no-startup-id firefox -private-window https://xkcd.com/ # make it such that it only appears when new one is launched
 
 # Dunst
 exec --no-startup-id dunst &

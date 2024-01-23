@@ -30,7 +30,7 @@ font pango:monospace 8
 
 ###### KEYBOARD BINDS : PROCESSES ######################################
 
-# Terminal : alacritty
+# Terminal : st
 bindsym $mod+Return exec --no-startup-id $EDITOR
 
 # Application launcher : dmenu
@@ -86,7 +86,7 @@ bindsym $mod+e layout toggle split
 bindsym $mod+Shift+space floating toggle
 
 # focus toggle tiling and floating
-bindsym $mod+c focus mode_toggle
+bindsym $mod+a focus mode_toggle
 
 # focus the child container
 # bindsym $mod+d focus child
@@ -202,6 +202,10 @@ floating_modifier $mod
 mouse_warping none
 focus_follows_mouse no
 
+# Scratchpad
+bindsym $mod+Shift+minus move scratchpad
+bindsym $mod+minus scratchpad show
+
 ##### AESTHETICS ##############################################
 
 # Gaps
@@ -209,7 +213,6 @@ gaps inner 5
 
 # Removing titles for all windows
 for_window [class="^.*"] border pixel 2px
-
 
 ##### SOUND SYSTEM(alsa) ##########################################
 

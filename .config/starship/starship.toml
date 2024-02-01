@@ -3,7 +3,7 @@
 
 
 # Inserts a blank line between shell prompts
-add_newline = true
+# add_newline = true
 
 format = """
 $username\
@@ -28,6 +28,6 @@ always_show_remote = true
 
 [directory]
 format = '\[[CrinklyNinja | $path]($style)\] ' # Must replace CrinklyNinja with $user
-truncation_length = 0
+truncation_length = 1
 
 

@@ -1,79 +1,102 @@
-# Where starship takes over
-eval "$(starship init zsh)"
+# If you come from bash you might have to change your $PATH.
+# export PATH=$HOME/bin:/usr/local/bin:$PATH
 
-source "$XDG_CONFIG_HOME/shell/aliasrc"
+# Path to your oh-my-zsh installation.
+export ZSH="$ZDOTDIR/ohmyzsh"
 
-# Bindings
-bindkey "^[[1;5C" forward-word
-bindkey "^[[1;5D" backward-word
+# Set name of the theme to load --- if set to "random", it will
+# load a random theme each time oh-my-zsh is loaded, in which case,
+# to know which specific one was loaded, run: echo $RANDOM_THEME
+# See https://github.com/ohmyzsh/ohmyzsh/wiki/Themes
+# ZSH_THEME="af-magic"
 
-yt-mp3()
-{
-    # Modify code to take --name argument to give output of filenmaae
-    # Right now, the default is filename in youtube
-    echo -n "Are you sure to download? This replaces existing filenames (y/n): " 
-    read ch
+# Set list of themes to pick from when loading at random
+# Setting this variable when ZSH_THEME=random will cause zsh to load
+# a theme from this variable instead of looking in $ZSH/themes/
+# If set to an empty array, this variable will have no effect.
+# ZSH_THEME_RANDOM_CANDIDATES=( "robbyrussell" "agnoster" )
 
-    if [ "$ch" = 'y' ]; then
-        for url in $@
-        do
-            yt-dlp -x $url -P $HOME/moosic/
-            # yt-dlp -x $url -P $HOME/moosic/ -o "name"
+# Uncomment the following line to use case-sensitive completion.
+# CASE_SENSITIVE="true"
 
-            if [ $? -eq 0 ]; then
-                echo "Da DJ is in the house!"
-            else
-                echo "ERROR: You got a false ID, biatch"
-            fi
-        done
-    elif [ "$ch" = 'n' ]; then
-        echo "Why'd you bother me then, you dipshit?"
-    else
-        echo "Where'd you learn to read?"
-    fi
-}
+# Uncomment the following line to use hyphen-insensitive completion.
+# Case-sensitive completion must be off. _ and - will be interchangeable.
+# HYPHEN_INSENSITIVE="true"
 
-wiki()
-{
-	for url in $@
-	do
-		firefox -private-window "https://wiki.archlinux.org/index.php?search=$url"
-	done
-}
+# Uncomment one of the following lines to change the auto-update behavior
+# zstyle ':omz:update' mode disabled  # disable automatic updates
+# zstyle ':omz:update' mode auto      # update automatically without asking
+# zstyle ':omz:update' mode reminder  # just remind me to update when it's time
 
-yt()
-{
-	for url in $@
-	do 
-		firefox -private-window "https://youtube.com/results?search_query=$url"
-	done
-}
+# Uncomment the following line to change how often to auto-update (in days).
+# zstyle ':omz:update' frequency 13
 
-fcd()
-{
-    cd "$(find -type d | fzf)"
-}
+# Uncomment the following line if pasting URLs and other text is messed up.
+# DISABLE_MAGIC_FUNCTIONS="true"
 
-open()
-{
-    xdg-open "$(find -type f | fzf)"
-}
+# Uncomment the following line to disable colors in ls.
+# DISABLE_LS_COLORS="true"
 
-pdf()
-{
-    cd && zathura "$(find -type f -iname "*.pdf" | fzf)" && cd -
-}
+# Uncomment the following line to disable auto-setting terminal title.
+# DISABLE_AUTO_TITLE="true"
 
-# Add countdown and timer
+# Uncomment the following line to enable command auto-correction.
+# ENABLE_CORRECTION="true"
 
-# Add a song end of playlist using substring
-mpcadd()
-{
-    mpc add "$(mpc ls | grep -i "$1")";
-    if [ $? -eq 0 ]; then
-        echo "Successfully added!\nPlaylist:"
-        mpc playlist | cat -n
-    else
-        echo "Failed to add to playlist"
-    fi
-}
+# Uncomment the following line to display red dots whilst waiting for completion.
+# You can also set it to another string to have that shown instead of the default red dots.
+# e.g. COMPLETION_WAITING_DOTS="%F{yellow}waiting...%f"
+# Caution: this setting can cause issues with multiline prompts in zsh < 5.7.1 (see #5765)
+# COMPLETION_WAITING_DOTS="true"
+
+# Uncomment the following line if you want to disable marking untracked files
+# under VCS as dirty. This makes repository status check for large repositories
+# much, much faster.
+# DISABLE_UNTRACKED_FILES_DIRTY="true"
+
+# Uncomment the following line if you want to change the command execution time
+# stamp shown in the history command output.
+# You can set one of the optional three formats:
+# "mm/dd/yyyy"|"dd.mm.yyyy"|"yyyy-mm-dd"
+# or set a custom format using the strftime function format specifications,
+# see 'man strftime' for details.
+# HIST_STAMPS="mm/dd/yyyy"
+
+# Would you like to use another custom folder than $ZSH/custom?
+# ZSH_CUSTOM=/path/to/new-custom-folder
+
+# Which plugins would you like to load?
+# Standard plugins can be found in $ZSH/plugins/
+# Custom plugins may be added to $ZSH_CUSTOM/plugins/
+# Example format: plugins=(rails git textmate ruby lighthouse)
+# Add wisely, as too many plugins slow down shell startup.
+plugins=(git vi-mode)
+
+source $ZSH/oh-my-zsh.sh
+
+# User configuration
+source $XDG_CONFIG_HOME/zsh.d/myconfig.zsh
+
+# export MANPATH="/usr/local/man:$MANPATH"
+
+# You may need to manually set your language environment
+# export LANG=en_US.UTF-8
+
+# Preferred editor for local and remote sessions
+# if [[ -n $SSH_CONNECTION ]]; then
+#   export EDITOR='vim'
+# else
+#   export EDITOR='mvim'
+# fi
+
+# Compilation flags
+# export ARCHFLAGS="-arch x86_64"
+
+# Set personal aliases, overriding those provided by oh-my-zsh libs,
+# plugins, and themes. Aliases can be placed here, though oh-my-zsh
+# users are encouraged to define aliases within the ZSH_CUSTOM folder.
+# For a full list of active aliases, run `alias`.
+#
+# Example aliases
+# alias zshconfig="mate ~/.zshrc"
+# alias ohmyzsh="mate ~/.oh-my-zsh"

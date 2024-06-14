@@ -74,7 +74,7 @@ require('lazy').setup({
   'tpope/vim-rhubarb',
 
   -- Detect tabstop and shiftwidth automatically
-  'tpope/vim-sleuth',
+  -- 'tpope/vim-sleuth',
 
   -- NOTE: This is where your plugins related to LSP can be installed.
   --  The configuration is done below. Search for lspconfig to find it below.
@@ -110,6 +110,18 @@ require('lazy').setup({
       -- Adds a number of user-friendly snippets
       'rafamadriz/friendly-snippets',
     },
+  },
+
+  -- File tree
+  {
+    "nvim-neo-tree/neo-tree.nvim",
+    branch = "v3.x",
+    dependencies = {
+      "nvim-lua/plenary.nvim",
+      "nvim-tree/nvim-web-devicons", -- not strictly required, but recommended
+      "MunifTanjim/nui.nvim",
+      -- "3rd/image.nvim", -- Optional image support in preview window: See `# Preview Mode` for more information
+    }
   },
 
   -- Useful plugin to show you pending keybinds.
@@ -159,19 +171,28 @@ require('lazy').setup({
     },
   },
 
+  -- Theme
   {
-    -- Theme inspired by Atom
-    'navarasu/onedark.nvim',
-    priority = 1000,
+    "folke/tokyonight.nvim",
     lazy = false,
-    config = function()
-      require('onedark').setup {
-        -- Set a style preset. 'dark' is default.
-        style = 'dark', -- dark, darker, cool, deep, warm, warmer, light
-      }
-      require('onedark').load()
-    end,
+    priority = 1000,
+    opts = {},
   },
+
+  -- {
+    --   -- Theme inspired by Atom
+    --   'navarasu/onedark.nvim',
+    --   priority = 1000,
+  --   lazy = false,
+  --   config = function()
+  --     require('onedark').setup {
+  --       -- Set a style preset. 'dark' is default.
+  --       style = 'deep', -- dark, darker, cool, deep, warm, warmer, light
+  --     }
+  --     require('onedark').load()
+  --   end,
+  -- },
+  --
 
   {
     -- Set lualine as statusline
@@ -229,6 +250,21 @@ require('lazy').setup({
     build = ':TSUpdate',
   },
 
+  -- Debugger (nvim-dap)
+  {
+    'mfussenegger/nvim-dap',
+    'theHamsta/nvim-dap-virtual-text',
+    'rcarriga/nvim-dap-ui',
+    "jay-babu/mason-nvim-dap.nvim",
+    "mfussenegger/nvim-dap-python",
+  },
+
+  {
+    -- Dependency for nvim-dap-ui
+    "rcarriga/nvim-dap-ui",
+    dependencies = {"mfussenegger/nvim-dap", "nvim-neotest/nvim-nio"}
+  }
+
   -- NOTE: Next Step on Your Neovim Journey: Add/Configure additional "plugins" for kickstart
   --       These are some example plugins that I've included in the kickstart repository.
   --       Uncomment any of the lines below to enable them.
@@ -244,6 +280,58 @@ require('lazy').setup({
   -- { import = 'custom.plugins' },
 }, {})
 
+-- nvim-dap DEBUGGER CONFIGURATION
+-- ================================
+local dapui = require("dapui")
+local dap = require("dap")
+
+require("nvim-dap-virtual-text").setup()
+require("dap-python").setup("~/.config/nvim/.virtualenvs/debugpy/bin/python")
+dapui.setup()
+
+dap.defaults.fallback.focus_terminal = true
+-- dap.defaults.fallback. = true
+
+-- C
+dap.adapters.gdb = {
+  type = "executable",
+  command = "gdb",
+  args = { "-i", "dap" }
+}
+dap.configurations.c = {
+  {
+    name = "Launch",
+    type = "gdb",
+    request = "launch",
+    program = function()
+      return vim.fn.input('Path to executable: ', vim.fn.getcwd() .. '/', 'file')
+    end,
+    cwd = "${workspaceFolder}",
+    stopAtBeginningOfMainSubprogram = false,
+  },
+}
+vim.keymap.set("n", '<leader>dc', function() dap.continue() end, { desc = "[c] dap.continue()" })
+vim.keymap.set("n", '<F10>', function() dap.step_over() end, { desc = "<F10> step over" })
+vim.keymap.set("n", '<F11>', function() dap.step_into() end, { desc = "<F11> step into" })
+vim.keymap.set("n", '<F12>', function() dap.step_out() end, { desc = "<F12> step out" })
+vim.keymap.set("n", '<leader>dl', function() dap.run_last() end, { desc = "[l] run last" })
+vim.keymap.set("n", '<leader>b', function() dap.toggle_breakpoint() end, { desc = "[b] toggle breakpoint" })
+vim.keymap.set("n", '<leader>dt', function() dap.terminate() end, { desc = "[o] terminate session" })
+
+vim.keymap.set("n", '<leader>do', function() dapui.open() end, { desc = "[o] open gui" })
+vim.keymap.set("n", '<leader>dd', function() dapui.close() end, { desc = "[o] close gui" })
+
+-- Theme
+require("tokyonight").setup({
+  style="night",
+})
+
+vim.cmd "colorscheme tokyonight"
+
+
+-- File explorer
+vim.keymap.set("n", "<leader>t", function() vim.cmd "Neotree" end, { desc = "[t] open file explorer" })
+
 -- [[ Setting options ]]
 -- See `:help vim.o`
 -- NOTE: You can change these options as you wish!
@@ -253,6 +341,7 @@ vim.o.hlsearch = true
 
 -- Make line numbers default
 vim.wo.number = true
+vim.wo.relativenumber = true
 
 -- Enable mouse mode
 vim.o.mouse = 'a'
@@ -264,6 +353,12 @@ vim.o.clipboard = 'unnamedplus'
 
 -- Enable break indent
 vim.o.breakindent = true
+
+-- tabstop and spacing
+vim.opt.tabstop = 4
+vim.opt.shiftwidth = 4
+vim.opt.expandtab = true
+vim.bo.softtabstop = 4
 
 -- Save undo history
 vim.o.undofile = true
@@ -298,7 +393,7 @@ vim.keymap.set("t", "<C-k>", "<C-\\><C-n><C-w>k")
 vim.keymap.set("t", "<C-l>", "<C-\\><C-n><C-w>l")
 -- terminal
 vim.keymap.set('n', '<leader>st', ':vsplit<CR>:terminal<CR>i')
-vim.keymap.set('t', '<leader>st', '<C-\\><C-n>:q<CR>')
+-- vim.keymap.set('t', '<leader>st', '<C-\\><C-n>:q<CR>')
 
 -- Keymaps for better default experience
 -- See `:help vim.keymap.set()`
@@ -332,12 +427,12 @@ require('telescope').setup {
   defaults = {
     mappings = {
       i = {
-        ['<C-u>'] = false,
-        ['<C-d>'] = false,
-
         -- personal mappings
+        ['<C-u>'] = actions.preview_scrolling_up,
+        ['<C-d>'] = actions.preview_scrolling_down,
         ['<C-k>'] = actions.move_selection_previous,
         ['<C-j>'] = actions.move_selection_next,
+        ["<C-D>"] = actions.delete_buffer + actions.move_to_top,
         -- ['<Space>'] = actions.add_selection + actions.move_selection_next,
       },
     },
@@ -580,7 +675,9 @@ local servers = {
 }
 
 -- Setup neovim lua configuration
-require('neodev').setup()
+require('neodev').setup({
+  library = { plugins = { "nvim-dap-ui" }, types = true }
+})
 
 -- nvim-cmp supports additional completion capabilities, so broadcast that to servers
 local capabilities = vim.lsp.protocol.make_client_capabilities()

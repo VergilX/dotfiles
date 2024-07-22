@@ -124,6 +124,13 @@ require('lazy').setup({
     }
   },
 
+  -- Org mode
+  {
+    "nvim-orgmode/org-bullets.nvim"
+  },
+
+  -- Try this one: https://github.com/nvim-orgmode/orgmode?tab=readme-ov-file
+
   -- Useful plugin to show you pending keybinds.
   { 'folke/which-key.nvim', opts = {} },
   {
@@ -179,20 +186,21 @@ require('lazy').setup({
     opts = {},
   },
 
-  -- {
-    --   -- Theme inspired by Atom
-    --   'navarasu/onedark.nvim',
-    --   priority = 1000,
-  --   lazy = false,
-  --   config = function()
-  --     require('onedark').setup {
-  --       -- Set a style preset. 'dark' is default.
-  --       style = 'deep', -- dark, darker, cool, deep, warm, warmer, light
-  --     }
-  --     require('onedark').load()
-  --   end,
-  -- },
-  --
+  -- Tabs
+  {'romgrk/barbar.nvim',
+    dependencies = {
+      'lewis6991/gitsigns.nvim', -- OPTIONAL: for git status
+      'nvim-tree/nvim-web-devicons', -- OPTIONAL: for file icons
+    },
+    init = function() vim.g.barbar_auto_setup = false end,
+    opts = {
+      -- lazy.nvim will automatically call setup for you. put your options here, anything missing will use the default:
+      -- animation = true,
+      -- insert_at_start = true,
+      -- …etc.
+    },
+    version = '^1.0.0', -- optional: only update when a new 1.x version is released
+  },
 
   {
     -- Set lualine as statusline
@@ -325,9 +333,14 @@ vim.keymap.set("n", '<leader>dd', function() dapui.close() end, { desc = "[o] cl
 require("tokyonight").setup({
   style="night",
 })
-
 vim.cmd "colorscheme tokyonight"
 
+-- Org mode
+require('org-bullets').setup()
+
+-- Buffer movement
+vim.keymap.set("n", '<C-n>', function() vim.cmd "BufferNext" end, { desc = "BufferNext" })
+vim.keymap.set("n", '<C-p>', function() vim.cmd "BufferPrevious" end, { desc = "BufferPrevious" })
 
 -- File explorer
 vim.keymap.set("n", "<leader>t", function() vim.cmd "Neotree" end, { desc = "[t] open file explorer" })

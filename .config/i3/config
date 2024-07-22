@@ -20,7 +20,7 @@ set $ws9 "9"
 set $ws10 "10"
 
 # Terminal
-set $EDITOR "st"
+set $TERMINAL "st"
 
 ####### FONTS ##############################################
 
@@ -31,10 +31,12 @@ font pango:monospace 8
 ###### KEYBOARD BINDS : PROCESSES ######################################
 
 # Terminal : st
-bindsym $mod+Return exec --no-startup-id $EDITOR
+bindsym $mod+Return exec --no-startup-id $TERMINAL
+# bindsym $mod+Shift+Return exec --no-startup-id $TERMINAL $(pwd)
 
 # Application launcher : dmenu
-bindsym $mod+d exec --no-startup-id dmenu_run -fn 'IBM Plex Mono'
+# bindsym $mod+d exec --no-startup-id dmenu_run -fn 'IBM Plex Mono' -p "Open: "
+bindsym $mod+d exec --no-startup-id dmenu_run -p "sup nig: "
 
 # kill focused window
 bindsym $mod+q kill
@@ -123,8 +125,8 @@ bindsym $mod+Shift+0 move container to workspace $ws10
 
 # Assignment (use xprop to get class)
 assign [class="firefox"] $ws2
-assign [class="Discord"] $
-assign [class="Spotify"] $ws3
+# assign [class="Discord"] $
+# assign [class="Spotify"] $ws3
 # for_window [class="Spotify"] $ws5
 
 ##### KEYBOARD BINDS: i3 #####################################
@@ -173,7 +175,7 @@ exec --no-startup-id picom --config "$XDG_CONFIG_HOME/picom/picom.conf"
 
 # Wallpaper: Nitrogen
 # exec --no-startup-id nitrogen --set-scaled "$PICS/wallpaper.jpg"
-exec --no-startup-id nitrogen --set-auto "pics/homura.jpg"
+exec --no-startup-id nitrogen --set-auto "pics/funny.jpg"
 
 # Resolution (done in xinitrc)
 # exec ~/.screenlayout/set_res.sh &
@@ -183,9 +185,6 @@ exec --no-startup-id $EDITOR
 # exec --no-startup-id LD_PRELOAD=/usr/lib/spotify-adblock.so spotify --no-zygote
 
 # exec firefox -private-window https://www.youtube.com/results?search_query="pomodoro technique sherry formula"
-
-exec  --no-startup-id firefox -private-window https://wiki.archlinux.org/title/General_recommendations
-exec  --no-startup-id firefox -private-window https://xkcd.com/ # make it such that it only appears when new one is launched
 
 # Dunst
 exec --no-startup-id dunst &
@@ -214,6 +213,9 @@ gaps inner 5
 # Removing titles for all windows
 for_window [class="^.*"] border pixel 2px
 
+# All floating windows
+# for_window [class="^.*"] floating enable
+
 ##### SOUND SYSTEM(alsa) ##########################################
 
 bindsym XF86AudioRaiseVolume exec --no-startup-id amixer sset Master 3%+
@@ -239,11 +241,13 @@ bindsym $win+Shift+l exec --no-startup-id mpc next && dunstctl close && notify-s
 bindsym $win+Shift+k exec --no-startup-id mpc prev && mpc next && dunstctl close && notify-send "Repeat: $(mpc current)"
 bindsym $win+Shift+j exec --no-startup-id mpc toggle
 
+bindsym $win+Shift+m exec --no-startup-id ~/scripts/dmenu/moo-search
+
 ##### BRIGHTNESS ###################################################
 
 # Try this one out
 # https://github.com/AquaUseful/bash-autobrightness/blob/master/auto_br.sh
-bindsym XF86MonBrightnessUp exec --no-startup-id brightnessctl s +500
+bindsym XF86MonBrightnessUp exec --no-startup-id brightnessctl s +1000
 
 bindsym XF86MonBrightnessDown exec --no-startup-id brightnessctl s 500-
 

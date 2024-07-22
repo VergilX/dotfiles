@@ -1,0 +1,8 @@
+xrandr --auto
+xrandr --dpi 96 &
+xset r rate 175 60 &
+
+# To check battery status
+python3 /home/abhinand/scripts/battery.py > /home/abhinand/scripts/battery-log 2>&1 &
+
+exec i3

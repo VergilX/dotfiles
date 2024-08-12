@@ -17,8 +17,8 @@ export PATH="$PATH:/home/abhinand/scripts/all"
 
 # zsh
 export ZDOTDIR="$XDG_CONFIG_HOME/zsh"
-export HISTCONTROL=ignoredups
-export PAGER="/usr/bin/less"
+# export HISTCONTROL=ignoredups
+# export PAGER="/usr/bin/less"
 
 # MariaDB
 export MARIADB_HOME="$XDG_CONFIG_HOME/mariadb"
